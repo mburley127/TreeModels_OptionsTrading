@@ -2,7 +2,7 @@
 This repository contains implementations of various option pricing tree models in Python. The models included are:
 
 1. **Binomial Model**
-   - `Binomial.ipynb`: Contains the implementation of the Binomial option pricing model.
+   - `Binomial.ipynb`: Contains the implementation of the Binomial option pricing model. <br/> 
 
    The Binomial Option Pricing Model is a widely used method for valuing American options, which are options contracts that can be exercised at any point up until, and including, the expiration date. The process for computing both       American and European option values in a binomial tree model is conducted through backward induction.
 
