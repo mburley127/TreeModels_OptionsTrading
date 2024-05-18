@@ -4,12 +4,12 @@ This repository contains implementations of various option pricing tree models i
 1. **Binomial Model**
    - `Binomial.ipynb`: Contains the implementation of the Binomial option pricing model. <br/> 
 
-   The Binomial Option Pricing Model is a widely used method for valuing American options, which are options contracts that can be exercised at any point up until, and including, the expiration date. The process for computing both       American and European option values in a binomial tree model is conducted through backward induction.
+   The Binomial Option Pricing Model is a widely used method for valuing American options, which are options contracts that can be exercised at any point up until, and including, the expiration date. The process for computing both       American and European option values in a binomial tree model is conducted through backward induction. <br/> 
 
-   First, the desired asset data is retrieved to compute the most recent asset price (S_0), the volatility (σ), and an appropriate strike price (K). The binomial American/European option model is constructed by first computing the       upward (u) and downward (d) movements and their respective probabilities (p). The up and down factors are calculated as:
-      u = exp⁡(σΔt)
-      d = exp⁡(−σΔt)
-      p = exp⁡(rΔt)−d / (u−d)
+   First, the desired asset data is retrieved to compute the most recent asset price (S_0), the volatility (σ), and an appropriate strike price (K). The binomial American/European option model is constructed by first computing the       upward (u) and downward (d) movements and their respective probabilities (p). The up and down factors are calculated as: <br/> 
+      u = exp⁡(σΔt) <br/> 
+      d = exp⁡(−σΔt) <br/> 
+      p = exp⁡(rΔt)−d / (u−d) <br/> 
 
    Next, the tree of prices is computed, which requires iteration starting at the initial price S0S0​ and multiplying it by the factors u and d corresponding to the number of up and down movements, respectively, needed to reach node      nn:
       S_(n,i) = S_0⋅u_(n−i)⋅d_i 
