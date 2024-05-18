@@ -20,13 +20,12 @@ This repository contains implementations of various option pricing tree models i
    If the option is a put, the option value is computed as: <br/> 
       value = max⁡[K - S_(n,i), 0] <br/> 
 
-   For a European option contract, beginning at the terminal nodes (node n), final option values are determined based on the stock price at maturity. Moving backward, intermediate nodes calculate option values using expected future    payoffs discounted at the risk-free rate, integrating probabilities from the binomial distribution for upward (u) and downward (d) movements. This process culminates at the starting node (node 0), yielding the initial option          value and enabling the determination of the option's fair price: <br/> 
+   For a European option contract, beginning at the terminal nodes (node n), final option values are determined based on the stock price at maturity. Moving backward, intermediate nodes calculate option values using expected future    payoffs discounted at the risk-free rate, integrating probabilities from the binomial distribution for upward (u) and downward (d) movements. This process culminates at the starting node (node 0), yielding the initial option          value and enabling the determination of the option's fair price: <br/>
       value_(i,j) = exp⁡(−rΔt)⋅[p⋅value_(i,j+1) + (1−p)⋅value_(i+1,j+1)] <br/> 
 
    For an American option contract, the value calculation uses the same backward induction logic as the European contract. However, at each node, the option value is computed as the maximum between the hold value, which is the           computed option value at the specified node, and the exercise value, which is the option value at the terminal node. Specifically: <br/> 
    value_(i,j) = max⁡(exercise value, hold value) <br/> 
    where: <br/>
-   
     Exercise Value for Call: max⁡[S_(i,j) − K, 0] <br/> 
     Exercise Value for Put: max⁡[K - S_(i,j), 0] <br/> 
     Hold Value: exp⁡(−rΔt)⋅[p⋅value_(i,j+1) + (1−p)⋅value_(i+1,j+1)] <br/> 
