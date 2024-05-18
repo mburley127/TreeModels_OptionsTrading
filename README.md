@@ -4,15 +4,34 @@ This repository contains implementations of various option pricing tree models i
 1. **Binomial Model**
    - `Binomial.ipynb`: Contains the implementation of the Binomial option pricing model.
 
-   The Binomial Option Pricing Model is a widely used method for valuing American options, which are options contracts that can be exercised at any point up until, and including, the expiration date. The process for computing both American and European option values in a binomial tree model are computed through backward induction. The desired asset data is retrieved, which allows for the computation of the most recent asset price, the volatility (sigma), and an appropriate strike price. The binomial american/european option model was constructed by first computing the upward/downward movements and their respective probabilities. From there, the tree of prices must be computed which requires iteration starting at the initial price S_0​ and multiplying it by the factors u and d corresponding to the number of up and down movements, respectively, needed to reach node n. The following function is used:
-    S_n​ = S_0 * u^m * d^(n−m)
-where m is the number of up movements from the initial node to node n, calculated as m = n - i. From there, the option type is determined at the final node, S_n:
-   If the option is a call, the option value is computed as: max((S_n[i, n] - K), 0)
-   If the option is a put, the option value is computed as: max((K - S_n[i, n]), 0)
-Finally the desired option value can be computed. For a European option contract:
-   Beginning at terminal nodes (node n), final option values are determined based on the stock price at maturity. Moving backward, intermediate nodes calculate option values using expected future payoffs discounted at the risk-free      rate, integrating probabilities from the binomial distribution for upward (u) and downward (d) movements. This process culminates at the starting node (node 0), yielding the initial option value and enabling the determination of      the option's fair price.
-For an American Option Contract:
-   The american option value uses the same option value computation logic as the european contract, but the option value is computed as the maximum value between the hold value, which is the computed option value at the specified node, and the exercise value, which is the option value at the terminal node. If the hold value > exercise value, the contract will be executed prior to expiry. If exercise value > hold value, the will be executed at the terminal node.
+   The Binomial Option Pricing Model is a widely used method for valuing American options, which are options contracts that can be exercised at any point up until, and including, the expiration date. The process for computing both       American and European option values in a binomial tree model is conducted through backward induction.
+
+   First, the desired asset data is retrieved to compute the most recent asset price (S_0), the volatility (σ), and an appropriate strike price (K). The binomial American/European option model is constructed by first computing the       upward (u) and downward (d) movements and their respective probabilities (p). The up and down factors are calculated as:
+      u=exp⁡(σΔt)u=exp(σΔt)
+      d=exp⁡(−σΔt)d=exp(−σΔt)
+      p=exp⁡(rΔt)−du−dp=u−dexp(rΔt)−d​
+
+Next, the tree of prices is computed, which requires iteration starting at the initial price S0S0​ and multiplying it by the factors u and d corresponding to the number of up and down movements, respectively, needed to reach node nn:
+Sn,i=S0⋅u(n−i)⋅diSn,i​=S0​⋅u(n−i)⋅di
+where mm is the number of up movements from the initial node to node nn, calculated as m=n−im=n−i.
+
+At the final nodes of the binomial tree, the option value is determined based on the option type. If the option is a call, the option value is computed as:
+value=max⁡(Sn,i−K,0)value=max(Sn,i​−K,0)
+If the option is a put, the option value is computed as:
+value=max⁡(K−Sn,i,0)value=max(K−Sn,i​,0)
+
+For a European option contract, beginning at the terminal nodes (node nn), final option values are determined based on the stock price at maturity. Moving backward, intermediate nodes calculate option values using expected future payoffs discounted at the risk-free rate, integrating probabilities from the binomial distribution for upward (u) and downward (d) movements. This process culminates at the starting node (node 00), yielding the initial option value and enabling the determination of the option's fair price:
+valuei,j=exp⁡(−rΔt)⋅(p⋅valuei,j+1+(1−p)⋅valuei+1,j+1)valuei,j​=exp(−rΔt)⋅(p⋅valuei,j+1​+(1−p)⋅valuei+1,j+1​)
+
+For an American option contract, the value calculation uses the same backward induction logic as the European contract. However, at each node, the option value is computed as the maximum between the hold value, which is the computed option value at the specified node, and the exercise value, which is the option value at the terminal node. Specifically:
+valuei,j=max⁡(exercise value,hold value)valuei,j​=max(exercise value,hold value)
+where:
+
+    Exercise Value for Call: max⁡(Si,j−K,0)max(Si,j​−K,0)
+    Exercise Value for Put: max⁡(K−Si,j,0)max(K−Si,j​,0)
+    Hold Value: exp⁡(−rΔt)⋅(p⋅valuei,j+1+(1−p)⋅valuei+1,j+1)exp(−rΔt)⋅(p⋅valuei,j+1​+(1−p)⋅valuei+1,j+1​)
+
+If the hold value exceeds the exercise value, the contract is executed prior to expiry. If the exercise value exceeds the hold value, the contract is executed at the terminal node. Through this method, the Binomial Option Pricing Model provides a robust framework for valuing American and European options.
 
 3. **Trinomial Model**
    - `Trinomial.ipynb`: Contains the implementation of the Trinomial option pricing model.
