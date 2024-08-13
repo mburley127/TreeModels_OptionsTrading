@@ -6,11 +6,11 @@ This repository contains implementations of various option pricing tree models i
 
    The Binomial Option Pricing Model is a widely used method for valuing American and European options. American options can be exercised at any point up until expiration, making their valuation more complex than European options, which can only be exercised at maturity. The binomial model uses a backward induction process to calculate option values, constructing a tree of possible asset prices over time. <br/> 
 
-To start, the model requires the most recent asset price, volatility, and an appropriate strike price. Using these inputs, the model calculates the possible upward and downward movements in asset price and their respective probabilities. The tree is then built by iterating from the initial asset price and applying these movements at each step. <br/> 
+   To start, the model requires the most recent asset price, volatility, and an appropriate strike price. Using these inputs, the model calculates the possible upward and downward movements in asset price and their respective probabilities. The tree is then built by iterating from the initial asset price and applying these movements at each step. <br/> 
 
-At the final nodes of the tree, the option value is determined based on whether it's a call or put option. For European options, the process involves calculating the option's value at maturity and then working backward through the tree, using expected future payoffs discounted at the risk-free rate. This process results in the fair price of the option at the initial node. <br/> 
+   At the final nodes of the tree, the option value is determined based on whether it's a call or put option. For European options, the process involves calculating the option's value at maturity and then working backward through the tree, using expected future payoffs discounted at the risk-free rate. This process results in the fair price of the option at the initial node. <br/> 
 
-For American options, the model also uses backward induction but adds the flexibility of early exercise. At each node, the option's value is computed as the maximum between the value of holding the option and the value of exercising it. This ensures that the model accurately reflects the option's potential to be exercised before expiration. <br/> 
+   For American options, the model also uses backward induction but adds the flexibility of early exercise. At each node, the option's value is computed as the maximum between the value of holding the option and the value of exercising it. This ensures that the model accurately reflects the option's potential to be exercised before expiration. <br/> 
 
 2. **Trinomial Model**
    - `Trinomial.ipynb`: Contains the implementation of the Trinomial option pricing model.
